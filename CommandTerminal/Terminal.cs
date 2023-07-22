@@ -172,6 +172,7 @@ namespace CommandTerminal
 
         void OnGUI() {
             if (Event.current.Equals(Event.KeyboardEvent(ToggleHotkey))) {
+                SetupWindow();
                 SetState(TerminalState.OpenSmall);
                 initial_open = true;
             } else if (Event.current.Equals(Event.KeyboardEvent(ToggleFullHotkey))) {
