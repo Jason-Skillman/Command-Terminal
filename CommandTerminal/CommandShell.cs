@@ -88,15 +88,17 @@ namespace CommandTerminal
             get { return variables; }
         }
 
+        public void RegisterCommands() => RegisterCommands(Assembly.GetExecutingAssembly());
+
         /// <summary>
         /// Uses reflection to find all RegisterCommand attributes
         /// and adds them to the commands dictionary.
         /// </summary>
-        public void RegisterCommands() {
+        public void RegisterCommands(Assembly assembly) {
             var rejected_commands = new Dictionary<string, CommandInfo>();
             var method_flags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 
-            foreach (var type in Assembly.GetExecutingAssembly().GetTypes()) {
+            foreach (var type in assembly.GetTypes()) {
                 foreach (var method in type.GetMethods(method_flags)) {
                     var attribute = Attribute.GetCustomAttribute(
                         method, typeof(RegisterCommandAttribute)) as RegisterCommandAttribute;
