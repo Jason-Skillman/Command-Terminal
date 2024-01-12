@@ -5,6 +5,8 @@ using UnityEngine.Assertions;
 
 namespace CommandTerminal
 {
+    using System;
+
     public enum TerminalState
     {
         Close,
@@ -279,6 +281,8 @@ namespace CommandTerminal
                 command_text = cached_command_text; // Otherwise the TextField picks up the ToggleHotkey character event
                 input_fix = false;                  // Prevents checking string Length every draw call
             }
+
+            command_text = command_text.Replace("`", string.Empty);
 
             if (initial_open) {
                 GUI.FocusControl("command_text_field");
